@@ -1,0 +1,43 @@
+{
+  "name": "react-alert-dialog",
+  "version": "1.0.1",
+  "description": "An elegant alert for Javascript",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lourencorodrigo/react-alert-dialog.git"
+  },
+  "keywords": [
+    "react",
+    "alert",
+    "dialog",
+    "confirm",
+    "success",
+    "error",
+    "warning",
+    "message"
+  ],
+  "author": "Rodrigo Loureço <rsilvape@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lourencorodrigo/react-alert-dialog/issues"
+  },
+  "homepage": "https://github.com/lourencorodrigo/react-alert-dialog#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "path": "^0.12.7",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "styled-components": "^4.1.3"
+  }
+}
