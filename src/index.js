@@ -2,16 +2,19 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
+import { SvgSuccess, SvgError, SvgWarning } from "./icons";
 
 import {
   Wrapper,
   Content,
+  ContentWrapper,
   TitleWrapper,
   MessageWrapper,
   Title,
   Message,
   Footer,
-  Button
+  Button,
+  IconWrapper
 } from "./styles";
 import { dark, light } from "./theme";
 
@@ -21,7 +24,7 @@ const themes = {
 };
 
 const removeElementDialog = () => {
-  const target = document.getElementById("react-alert-dialog");
+  const target = document.getElementById("react-dialog-alert");
   unmountComponentAtNode(target);
   target.parentNode.removeChild(target);
 };
@@ -56,31 +59,41 @@ class Dialog extends React.Component {
   }
 
   render() {
-    const { title, message, buttons, theme, type } = this.props;
+    const { title, message, buttons, theme, type, hideIcons } = this.props;
     return (
       <ThemeProvider theme={themes[theme]}>
         <Wrapper onClick={this.close}>
-          <Content type={type} onClick={this.stopPropagation}>
-            <TitleWrapper>
-              <Title type={type}>{title}</Title>
-            </TitleWrapper>
-            <MessageWrapper>
-              <Message type={type}>{message}</Message>
-            </MessageWrapper>
-            <Footer>
-              {buttons.map((button, index) => (
-                <Button
-                  type={type}
-                  key={index}
-                  onClick={() => this.handleClickButton(button)}
-                  weight="bold"
-                  autoFocus={button.focus}
-                >
-                  {button.label}
-                </Button>
-              ))}
-            </Footer>
-          </Content>
+          <ContentWrapper type={type} onClick={this.stopPropagation}>
+            {!hideIcons && (
+              <IconWrapper type={type}>
+                {type === "success" && <SvgSuccess />}
+                {type === "error" && <SvgError />}
+                {type === "warning" && <SvgWarning />}
+              </IconWrapper>
+            )}
+
+            <Content>
+              <TitleWrapper>
+                <Title type={type}>{title}</Title>
+              </TitleWrapper>
+              <MessageWrapper>
+                <Message type={type}>{message}</Message>
+              </MessageWrapper>
+              <Footer>
+                {buttons.map((button, index) => (
+                  <Button
+                    type={type}
+                    key={index}
+                    onClick={() => this.handleClickButton(button)}
+                    weight="bold"
+                    autoFocus={button.focus}
+                  >
+                    {button.label}
+                  </Button>
+                ))}
+              </Footer>
+            </Content>
+          </ContentWrapper>
         </Wrapper>
       </ThemeProvider>
     );
@@ -88,12 +101,12 @@ class Dialog extends React.Component {
 }
 
 const createElementDialog = options => {
-  let divTarget = document.getElementById("react-alert-dialog");
+  let divTarget = document.getElementById("react-dialog-alert");
   if (divTarget) {
     render(<Dialog {...options} />, divTarget);
   } else {
     divTarget = document.createElement("div");
-    divTarget.id = "react-alert-dialog";
+    divTarget.id = "react-dialog-alert";
     document.body.appendChild(divTarget);
     render(<Dialog {...options} />, divTarget);
   }
@@ -105,6 +118,7 @@ export const showDialog = options => {
 
 Dialog.propTypes = {
   title: PropTypes.string.isRequired,
+  hideIcons: PropTypes.bool,
   message: PropTypes.string.isRequired,
   type: PropTypes.string,
   buttons: PropTypes.array.isRequired,
@@ -115,6 +129,7 @@ Dialog.propTypes = {
 Dialog.defaultProps = {
   theme: "dark",
   type: "success",
+  hideIcons: false,
   buttons: [
     {
       label: "Cancel",

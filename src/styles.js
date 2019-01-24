@@ -1,15 +1,29 @@
 import styled, { css, keyframes } from "styled-components";
 
-import success from "./assets/success.png";
-import error from "./assets/error.png";
-import warning from "./assets/warning.png";
-
-const fade = keyframes`
-  from {
+const slideInDown = keyframes`
+  0%,
+  60%,
+  75%,
+  90%,
+  to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
     opacity: 0;
+    transform: translate3d(0, -3000px, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 25px, 0);
+  }
+  75% {
+    transform: translate3d(0, -10px, 0);
+  }
+  90% {
+    transform: translate3d(0, 5px, 0);
   }
   to {
-    opacity: 1;
+    transform: none;
   }
 `;
 
@@ -30,52 +44,67 @@ export const IconWrapper = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  padding: 0 16px 0 46px;
+  padding-left: 24px;
+
+  & > svg {
+    width: 64px;
+    ${props =>
+      props.type === "success" &&
+      css`
+        fill: ${props => props.theme.iconSuccess};
+      `}
+
+    ${props =>
+      props.type === "error" &&
+      css`
+        fill: ${props => props.theme.iconError};
+      `}
+
+    ${props =>
+      props.type === "warning" &&
+      css`
+        fill: ${props => props.theme.iconWarning};
+      `}
+    }
 `;
 
 export const Content = styled.div`
-  background-repeat: no-repeat;
-  will-change: opacity;
+  flex-grow: 1;
+`;
+
+export const ContentWrapper = styled.div`
+  will-change: opacity, transform;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   min-width: 350px;
   margin: 16px;
   max-width: 600px;
   border-radius: 10px;
-  box-shadow: 0 0 35px 0 rgba(82, 82, 82, 0.25);
-  background-position: right top;
-  animation: ${fade} 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 35px 0 rgba(0, 0, 0, 0.36);
+  animation: ${slideInDown} 0.6s linear;
 
   ${props =>
     props.type === "success" &&
     css`
       background-color: ${props => props.theme.backgroundSuccess};
-      background-image: url(${success});
     `}
 
   ${props =>
     props.type === "error" &&
     css`
       background-color: ${props => props.theme.backgroundError};
-      background-image: url(${error});
     `}
 
   ${props =>
     props.type === "warning" &&
     css`
       background-color: ${props => props.theme.backgroundWarning};
-      background-image: url(${warning});
     `}
 `;
 
 export const TitleWrapper = styled.div`
   padding: 24px 24px 16px;
   display: flex;
-
-  & > svg {
-    fill: white;
-    padding-right: 16px;
-  }
 `;
 
 export const Title = styled.h1`
