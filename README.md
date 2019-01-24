@@ -2,7 +2,21 @@
 
 react-alert-dialog
 
-#### Options
+## Getting started
+
+#### Install with NPM
+
+```
+$ npm install react-alert-dialog --save
+```
+
+#### Install with Yarn
+
+```
+$ yarn add react-alert-dialog
+```
+
+## Options
 
 ```jsx
 const options = {
