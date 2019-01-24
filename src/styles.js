@@ -1,5 +1,7 @@
 import styled, { css, keyframes } from "styled-components";
 
+const em = value => `${value / 16}em`;
+
 const slideInDown = keyframes`
   0%,
   60%,
@@ -44,10 +46,10 @@ export const IconWrapper = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  padding-left: 24px;
+  padding-left: ${em(24)};
 
   & > svg {
-    width: 64px;
+    width: ${em(64)};
     ${props =>
       props.type === "success" &&
       css`
@@ -76,10 +78,10 @@ export const ContentWrapper = styled.div`
   will-change: opacity, transform;
   display: flex;
   flex-direction: row;
-  min-width: 350px;
+  min-width: ${em(350)};
   margin: 16px;
-  max-width: 600px;
-  border-radius: 10px;
+  max-width: ${em(600)};
+  border-radius: ${em(10)};
   box-shadow: 0 0 35px 0 rgba(0, 0, 0, 0.36);
   animation: ${slideInDown} 0.6s linear;
 
@@ -103,7 +105,7 @@ export const ContentWrapper = styled.div`
 `;
 
 export const TitleWrapper = styled.div`
-  padding: 24px 24px 16px;
+  padding: ${em(24)} ${em(24)} ${em(16)};
   display: flex;
 `;
 
@@ -111,7 +113,7 @@ export const Title = styled.h1`
   cursor: default;
   font-weight: 700;
   font-family: Roboto, sans-serif;
-  font-size: 40px;
+  font-size: ${em(40)};
   margin: 0;
 
   ${props =>
@@ -134,14 +136,14 @@ export const Title = styled.h1`
 `;
 
 export const MessageWrapper = styled.div`
-  padding: 0px 24px 20px;
+  padding: 0px ${em(24)} ${em(20)};
   color: red;
 `;
 
 export const Message = styled.p`
   cursor: default;
   font-family: Roboto, sans-serif;
-  font-size: 18px;
+  font-size: ${em(18)};
   font-weight: 100;
   margin: 0;
 
@@ -171,8 +173,8 @@ export const Footer = styled.div`
 `;
 
 export const Button = styled.button`
-  padding: 8px;
-  margin-left: 5px;
+  padding: ${em(8)};
+  margin-left: ${em(5)};
   background: transparent;
   border: none;
   cursor: pointer;
@@ -180,7 +182,7 @@ export const Button = styled.button`
   outline: none;
 
   font-family: Roboto, sans-serif;
-  font-size: 16px;
+  font-size: ${em(16)};
   font-weight: normal;
 
   &:hover,
